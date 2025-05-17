@@ -1,4 +1,4 @@
-et add=document.getElementById("add");
+let add=document.getElementById("add");
 let task=document.getElementById("task");
 add.addEventListener("click",(e)=>{
     e.preventDefault();
