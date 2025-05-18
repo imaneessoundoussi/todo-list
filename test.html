@@ -11,7 +11,7 @@
     padding: 40px;
   }
 
-  .search-box {
+  #search-container {
     position: relative;
     width: 400px;
     margin: 0 auto;
@@ -34,7 +34,7 @@
   }
 
   /* Icône loupe à gauche, positionnée absolument */
-  .search-box::before {
+  #search-container::before {
     content: "🔍";
     position: absolute;
     left: 14px;
@@ -45,8 +45,10 @@
     pointer-events: none;
   }
 </style>
+ 
 </head>
 <body>
+
 
     
 
@@ -61,10 +63,10 @@
  
  
  <ul id="todo-list">
-  <li>Faire les devoirs</li>
-  <li>Appeler maman</li>
-  <li>Aller à la gym</li>
-  <li>Terminer le projet</li>
+  <li class="todo-item">Faire les devoirs</li>
+  <li class="todo-item">Appeler maman</li>
+  <li class="todo-item">Aller à la gym</li>
+  <li class="todo-item">Terminer le projet</li>
 </ul>
 
  
@@ -77,29 +79,9 @@
  <button id="add" type="submit">ADD</button> 
 
 
-<<<<<<< HEAD
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="C:\Users\imane\Desktop\s4\js\practice\to do list\test.js"></script>
-=======
-<script src="main.js"></script>
->>>>>>> 92132506393a6c2788554a8590d1ef7e10ccfbc5
+<script src="test.js"></script>
 
 </body>
 </html>
