@@ -7,5 +7,5 @@ add.addEventListener("click",()=>{
 const li=document.createElement("li");
 li.innerHTML=input.value;
 list_box.appendChild(li);
-
+input.textContent='';
 })
