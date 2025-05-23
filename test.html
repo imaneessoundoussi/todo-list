@@ -10,6 +10,21 @@
     padding: 40px;
   }
 
+  .addBox{
+    display: flex;
+    border-radius: 20px;
+    bottom: 20px;
+    padding: 100px;
+    justify-content: space-between;
+  }
+  #add{
+    position: relative;
+  }
+  #task {
+   
+    flex:1;
+    border: none;
+  }
   #search-container {
     position: relative;
     width: 400px;
@@ -51,14 +66,18 @@
     <div id="search-container">
         <input type="text" class="search-input" id="search" placeholder="Search todos">
     </div>
+    
     <ul id="todo-list"></ul>
     <div id="btn">
+      
         <button id="toutes">All</button>
         <button id="en-cours">In Progress</button>
         <button id="termine">Completed</button>
     </div>
+    <div class="addBox">
     <input id="task" type="text" placeholder="Add a new task">
     <button id="add">ADD</button>
+  </div>
     <script src="test.js"></script>
 </body>
 </html>
