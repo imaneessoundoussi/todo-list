@@ -1,86 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>To-Do List</title>
     <style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 40px;
-  }
-
-  #search-container {
-    position: relative;
-    width: 400px;
-    margin: 0 auto;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 10px 40px 10px 40px; /* espace à gauche et à droite */
-    font-size: 18px;
-    border: 1px solid #dfe1e5;
-    border-radius: 24px;
-    box-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
-    outline: none;
-    transition: box-shadow 0.3s ease;
-  }
-
-  .search-input:focus {
-    box-shadow: 0 4px 10px rgb(0 0 0 / 0.3);
-    border-color: #4285f4;
-  }
-
-  /* Icône loupe à gauche, positionnée absolument */
-  #search-container::before {
-    content: "🔍";
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: #9aa0a6;
-    pointer-events: none;
-  }
-</style>
- 
+        body { font-family: Arial, sans-serif; padding: 40px; }
+        #search-container { position: relative; width: 400px; margin: 0 auto; }
+        .search-input {
+            width: 100%;
+            padding: 10px 40px;
+            font-size: 18px;
+            border: 1px solid #dfe1e5;
+            border-radius: 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            outline: none;
+        }
+        #search-container::before {
+            content: "🔍";
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        .completed { text-decoration: line-through; opacity: 0.7; }
+        .todo-item { display: flex; justify-content: space-between; margin: 8px 0; }
+    </style>
 </head>
 <body>
-
-
-    
-
- <h1 id="h1">TO-Do List</h1>
- <input id="find" type="text" placeholder="find your task:"><br>
- <br><br><br>
-
- <div id="search-container">
-  <input type="text" class= "search-input"    id="search" placeholder="search todos">
-  
- </div>
- 
- 
- <ul id="todo-list">
-  <li class="todo-item">Faire les devoirs</li>
-  <li class="todo-item">Appeler maman</li>
-  <li class="todo-item">Aller à la gym</li>
-  <li class="todo-item">Terminer le projet</li>
-</ul>
-
- 
-<div id="btn">
-<button id="toutes" type="submit">   all</button>
-<button id="en cours" type="submit"> in progress</button>
-<button id="termine" type="submit"> completed </button>
-</div>
-  <input id="task" type="text" placeholder="add a new task">  
- <button id="add" type="submit">ADD</button> 
-
-
-
-<script src="test.js"></script>
-
+    <h1>TO-Do List</h1>
+    <div id="search-container">
+        <input type="text" class="search-input" id="search" placeholder="Search todos">
+    </div>
+    <ul id="todo-list"></ul>
+    <div id="btn">
+        <button id="toutes">All</button>
+        <button id="en-cours">In Progress</button>
+        <button id="termine">Completed</button>
+    </div>
+    <input id="task" type="text" placeholder="Add a new task">
+    <button id="add">ADD</button>
+    <script src="test.js"></script>
 </body>
 </html>
