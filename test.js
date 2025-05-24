@@ -32,6 +32,7 @@ searchInput.addEventListener("keyup",() =>{
             event.target.classList.toggle("checked");
         }
     })
+    
 
 
 //suppression des taches :
