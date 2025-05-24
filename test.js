@@ -6,41 +6,6 @@ const list_box=document.getElementById("list_box");
 const searchInput = document.getElementById('search');
 
 
-add.addEventListener("click",()=>{
-
-const li=document.createElement("li");
-
-li.textContent = input.value;
-
-ul.appendChild(li);
-input.value = '';
-//db click
-li.addEventListener("dblclick",()=>{
-    const input2=document.createElement("input");
-    input2.type = "text";
-    const span=document.createElement("span");
-     input2.value = li.textContent;
-    
-    li.textContent = '';
-    li.appendChild(input2);
-  input2.focus();  //bax nktb blama nb9a nclick 3ad nktb 
-  
-  input2.addEventListener("keydown",(e)=>{
-    if (e.key === "Enter") {
-                li.textContent = input2.value;
-            }
-
-
-
-  })
-
-    
-})}
-
-
-)
-
-
 
 
 
@@ -49,6 +14,7 @@ add.addEventListener("click",()=>{
     if(input.value !== ''){
         const li=document.createElement("li");
 li.textContent = input.value;
+
 // supression des taches :
 const deleteBtn = document.createElement("button");
 deleteBtn.textContent = "🗑";
@@ -58,8 +24,32 @@ deleteBtn.addEventListener('click',() =>{
 li.appendChild(deleteBtn);
 ul.appendChild(li);
  input.value = '';
-}
-});   
+} //db click
+li.addEventListener("dblclick",()=>{
+    const input2=document.createElement("input");
+    input2.type = "text";
+     input2.value = li.textContent;
+    
+    li.textContent = '';
+    li.appendChild(input2);
+  input2.focus();  
+  
+  input2.addEventListener("keydown",(e)=>{
+    if (e.key === "Enter") {
+                li.textContent = input2.value;
+            }
+
+
+
+  });
+ 
+})
+
+   
+
+
+
+
 
 // rechercher les taches :
 const items = ul.getElementsByTagName('li');
