@@ -34,6 +34,12 @@ searchInput.addEventListener("keyup",() =>{
     })
     
 
+    const first=document.getElementById("toutes");
+
+    first.addEventListener("click",()=>{
+        
+    })
+
 
 //suppression des taches :
 
