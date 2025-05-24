@@ -26,6 +26,33 @@
     transition: box-shadow 0.3s ease;
   }
 
+  ul li{
+    list-style: none;
+  }
+
+  li::before{
+  content: "";
+  display: inline-block;
+  background-image: url("pics/empty_circle.jpg");
+  background-size: 16px 16px; 
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+
+  }
+  li.checked::before{
+  background-image: url("pics/filled circle.png");
+  color: gray;
+  text-decoration: line-through;
+  
+  }
+  li.checked{
+    color: gray;
+  text-decoration: line-through;
+  }
+
   .search-input:focus {
     box-shadow: 0 4px 10px rgb(0 0 0 / 0.3);
     border-color: #4285f4;
