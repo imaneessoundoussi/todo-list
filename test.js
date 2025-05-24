@@ -6,7 +6,9 @@ const list_box=document.getElementById("list_box");
 const searchInput = document.getElementById('search');
 
 add.addEventListener("click",()=>{
-    const li=document.createElement("li");
+
+const li=document.createElement("li");
+
 li.textContent = input.value;
 
 ul.appendChild(li);
@@ -28,6 +30,7 @@ li.addEventListener("dblclick",()=>{
             }
 
 
+
   })
 
     
@@ -35,6 +38,7 @@ li.addEventListener("dblclick",()=>{
 
 
 )
+
 // rechercher les taches :
 const items = ul.getElementsByTagName('li');
 searchInput.addEventListener("keyup",() =>{
@@ -45,6 +49,41 @@ searchInput.addEventListener("keyup",() =>{
     }
 });
 
+
+
+    ul.addEventListener("click",function(event){
+        if(event.target.tagName==="LI"){
+            event.target.classList.toggle("checked");
+        }
+    })
+    
+
+    const first=document.getElementById("toutes");
+
+    first.addEventListener("click",()=>{
+       const tasks=ul.querySelectorAll("li");
+       tasks.forEach(task=>{
+        task.style.display='';
+       })
+    })
+
+    const second=document.getElementById("en-cours");
+
+    second.addEventListener("click",()=>{
+        const tasks=ul.querySelectorAll("li");
+       tasks.forEach(task=>{
+        task.style.display=(task.classList.contains("checked")?'none':'');
+       })
+    })
+
+    const third=document.getElementById("termine");
+
+    third.addEventListener("click",()=>{
+        const tasks=ul.querySelectorAll("li");
+       tasks.forEach(task=>{
+        task.style.display=(task.classList.contains("checked")?'':'none');
+       })
+    })
 
 //suppression des taches :
 
