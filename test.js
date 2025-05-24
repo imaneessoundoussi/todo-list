@@ -37,9 +37,29 @@ searchInput.addEventListener("keyup",() =>{
     const first=document.getElementById("toutes");
 
     first.addEventListener("click",()=>{
-        
+       const tasks=ul.querySelectorAll("li");
+       tasks.forEach(task=>{
+        task.style.display='';
+       })
     })
 
+    const second=document.getElementById("en-cours");
+
+    second.addEventListener("click",()=>{
+        const tasks=ul.querySelectorAll("li");
+       tasks.forEach(task=>{
+        task.style.display=(task.classList.contains("checked")?'none':'');
+       })
+    })
+
+    const third=document.getElementById("termine");
+
+    third.addEventListener("click",()=>{
+        const tasks=ul.querySelectorAll("li");
+       tasks.forEach(task=>{
+        task.style.display=(task.classList.contains("checked")?'':'none');
+       })
+    })
 
 //suppression des taches :
 
