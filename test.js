@@ -1,93 +1,164 @@
 const input = document.getElementById("task");
 const add = document.getElementById("add");
 const ul = document.getElementById("todo-list");
-const list_box = document.getElementById("list_box");
-const searchInput = document.getElementById('search');
+const searchInput = document.getElementById("search");
 
+// Fonction pour mettre à jour la progression
+function updateProgress(showMessage = true) {
+  const tasks = ul.querySelectorAll("li");
+  const total = tasks.length;
+  const completed = [...tasks].filter(task => {
+    const checkbox = task.querySelector("input[type='checkbox']");
+    return checkbox && checkbox.checked;
+  }).length;
+
+  const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+  const progressBar = document.getElementById("progress-bar");
+  const progressText = document.getElementById("progress-text");
+  const overlay = document.getElementById("completion-overlay");
+
+  progressBar.style.width = `${percent}%`;
+  progressText.textContent = `${percent}% completed`;
+
+  if (showMessage) {
+    if (percent === 100 && total > 0) {
+      overlay.classList.add("active");
+      setTimeout(() => {
+        overlay.classList.remove("active");
+      }, 4000);
+    } else {
+      overlay.classList.remove("active");
+    }
+  } else {
+    overlay.classList.remove("active");
+  }
+}
+
+// Sauvegarder les tâches dans localStorage
+function saveTasks() {
+  const tasks = [];
+  ul.querySelectorAll("li").forEach(li => {
+    const checkbox = li.querySelector("input[type='checkbox']");
+    const span = li.querySelector("span");
+    tasks.push({
+      text: span.textContent,
+      checked: checkbox.checked
+    });
+  });
+  localStorage.setItem("todoList", JSON.stringify(tasks));
+}
+
+// Charger les tâches au chargement de la page
+function loadTasks() {
+  const tasks = JSON.parse(localStorage.getItem("todoList")) || [];
+  tasks.forEach(task => {
+    createTask(task.text, task.checked);
+  });
+  updateProgress(false);
+}
+
+// Créer une tâche (utilisée pour charger et ajouter)
+function createTask(text, checked = false) {
+  const li = document.createElement("li");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = checked;
+
+  const span = document.createElement("span");
+  span.textContent = text;
+  
+  // Supprimer
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "🗑";
+  deleteBtn.classList.add("delete-btn");
+  deleteBtn.addEventListener("click", () => {
+    li.remove();
+    updateProgress(false);
+    saveTasks();
+  });
+
+  // Modifier
+  span.addEventListener("dblclick", () => {
+    const input2 = document.createElement("input");
+    input2.type = "text";
+    input2.value = span.textContent;
+    li.replaceChild(input2, span);
+    input2.focus();
+
+    input2.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        span.textContent = input2.value.trim() || span.textContent;
+        li.replaceChild(span, input2);
+        saveTasks();
+      }
+    });
+  });
+
+  // Cocher/décocher
+  checkbox.addEventListener("change", () => {
+    li.classList.toggle("checked", checkbox.checked);
+    updateProgress();
+    saveTasks();
+  });
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  li.appendChild(deleteBtn);
+  ul.appendChild(li);
+}
+
+// Charger les tâches à l'ouverture
+window.addEventListener("load", loadTasks);
+
+// Ajouter une tâche
 add.addEventListener("click", () => {
-  if (input.value !== '') {
-    const li = document.createElement("li");
-    li.textContent = input.value;
-
-    // Bouton suppression
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "🗑";
-    deleteBtn.addEventListener('click', () => {
-      li.remove();
-    });
-    li.appendChild(deleteBtn);
-
-    // Double clic pour modifier la tâche
-    li.addEventListener("dblclick", () => {
-      const input2 = document.createElement("input");
-      input2.type = "text";
-      input2.value = li.textContent.replace('🗑', '').trim();
-
-      li.textContent = '';
-      li.appendChild(input2);
-      input2.focus();
-
-      input2.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          li.textContent = input2.value;
-          li.appendChild(deleteBtn);
-        }
-      });
-    });
-
-    ul.appendChild(li);
+  if (input.value.trim() !== '') {
+    createTask(input.value.trim(), false);
     input.value = '';
+    updateProgress();
+    saveTasks();
   }
 });
 
-// Ajout ici la gestion de la touche Enter sur l’input
+// Ajouter avec "Entrée"
 input.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     add.click();
   }
 });
 
-// Recherche des tâches
+// Recherche
 searchInput.addEventListener("keyup", () => {
   const term = searchInput.value.trim().toLowerCase();
-  const items = ul.getElementsByTagName('li');
+  const items = ul.querySelectorAll("li");
 
-  for (let i = 0; i < items.length; i++) {
-    const text = items[i].textContent.toLowerCase();
-    items[i].style.display = text.includes(term) ? '' : 'none';
-  }
-});
-
-// Gestion du clic pour cocher/décocher une tâche
-ul.addEventListener("click", function(event) {
-  if (event.target.tagName === "LI") {
-    event.target.classList.toggle("checked");
-  }
-});
-
-// Filtrer toutes les tâches
-const first = document.getElementById("toutes");
-first.addEventListener("click", () => {
-  const tasks = ul.querySelectorAll("li");
-  tasks.forEach(task => {
-    task.style.display = '';
+  items.forEach(item => {
+    const text = item.querySelector("span").textContent.toLowerCase();
+    item.style.display = text.includes(term) ? '' : 'none';
   });
 });
 
-// Filtrer les tâches en cours (non cochées)
-const second = document.getElementById("en-cours");
-second.addEventListener("click", () => {
-  const tasks = ul.querySelectorAll("li");
-  tasks.forEach(task => {
-    task.style.display = (task.classList.contains("checked") ? 'none' : '');
+// Filtres
+document.getElementById("toutes").addEventListener("click", () => {
+  ul.querySelectorAll("li").forEach(item => {
+    item.style.display = '';
   });
 });
 
-// Filtrer les tâches terminées (cochées)
-const third = document.getElementById("termine");
-third.addEventListener("click", () => {
-  const tasks = ul.querySelectorAll("li");
-  tasks.forEach(task => {
-    task.style.display = (task.classList.contains("checked") ? '' : 'none');
+document.getElementById("en-cours").addEventListener("click", () => {
+  ul.querySelectorAll("li").forEach(item => {
+    const checkbox = item.querySelector("input[type='checkbox']");
+    item.style.display = checkbox && !checkbox.checked ? '' : 'none';
   });
 });
+
+document.getElementById("termine").addEventListener("click", () => {
+  ul.querySelectorAll("li").forEach(item => {
+    const checkbox = item.querySelector("input[type='checkbox']");
+    item.style.display = checkbox && checkbox.checked ? '' : 'none';
+  });
+});
+
+
