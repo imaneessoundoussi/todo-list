@@ -1,94 +1,713 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 40px;
-  }
-  #search-container {
-    position: relative;
-    width: 400px;
-    margin: 0 auto;
-  }
-  .search-input {
-    width: 100%;
-    padding: 10px 40px 10px 40px; /* espace à gauche et à droite */
-    font-size: 18px;
-    border: 1px solid #dfe1e5;
-    border-radius: 24px;
-    box-shadow: 0 2px 5px rgb(0 0 0 / 0.2);
-    outline: none;
-    transition: box-shadow 0.3s ease;
-  }
-
-  ul li{
-    list-style: none;
-  }
-
-  li::before{
-  content: "";
-  display: inline-block;
-  background-image: url("pics/empty_circle.jpg");
-  background-size: 16px 16px; 
-  background-repeat: no-repeat;
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-  vertical-align: middle;
-
-  }
-  li.checked::before{
-  background-image: url("pics/filled circle.png");
-  color: gray;
-  text-decoration: line-through;
-  
-  }
-  li.checked{
-    color: gray;
-  text-decoration: line-through;
-  }
-
-  .search-input:focus {
-    box-shadow: 0 4px 10px rgb(0 0 0 / 0.3);
-    border-color: #4285f4;
-  }
-
-  /* Icône loupe à gauche, positionnée absolument */
-  #search-container::before {
-    content: "🔍";
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: #9aa0a6;
-    pointer-events: none;
-  }
-</style>
- 
-</head>
-<body>
-    <h1>TO-Do List</h1>
-    <div id="search-container">
-        <input type="text" class="search-input" id="search" placeholder="Search todos">
-    </div>
-    <input id="task" type="text" placeholder="Add a new task">
-    <button id="add">ADD</button>
-    <div id="list_box">
-    <ul id="todo-list"></ul>
-  </div>
-    <div id="btn">
-        <button id="toutes">All</button>
-        <button id="en-cours">In Progress</button>
-        <button id="termine">Completed</button>
-    </div>
-  
+    <style >
+      
+       
+       body {
+            background-color: aqua;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+        
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .box {
+            border: 1px solid black;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+        
+        #btn {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background: #f8f8f8;
+            min-width: 150px;
+        }
+        
+        button:hover {
+            background: #e0e0e0;
+        }
+        
+        #search-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .search-input, #task {
+            width: 100%;
+            padding: 12px 40px;
+            font-size: 18px;
+            border: 1px solid #dfe1e5;
+            border-radius: 24px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
     
-    <script src="test.js"></script>
+     
+        
+        ul {
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        li.checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+        
+        h1 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        :root {
+  --beige: #F5F5DC;
+  --blanc-casse: #FAF9F6;
+  --noir-profond: #1C1C1C;
+  --bleu-nuit: #2C3E50;
+  --vert-sauge: #A3B18A;
+  --brun-cacao: #5D4037;
+  --gris-perle: #D3D3D3;
+}
+
+body {
+  background-color: var(--beige);
+  font-family: Arial, sans-serif;
+  padding: 40px;
+  color: var(--noir-profond);
+}
+
+
+.container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.box {
+  border: 1px solid var(--gris-perle);
+  padding: 20px;
+  background: var(--blanc-casse);
+  border-radius: 8px;
+  flex-grow: 1;
+}
+
+#btn {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid var(--gris-perle);
+  background: var(--vert-sauge);
+  color: var(--blanc-casse);
+  min-width: 150px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: var(--brun-cacao);
+  color: var(--blanc-casse);
+}
+
+#search-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.search-input, #task {
+  width: 100%;
+  padding: 12px 40px;
+  font-size: 18px;
+  border: 1px solid var(--gris-perle);
+  border-radius: 24px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  background-color: var(--blanc-casse);
+  color: var(--noir-profond);
+}
+
+#add {
+  padding: 2px 25px;
+  background: var(--bleu-nuit);
+  color: var(--blanc-casse);
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+margin: 5px 6px 7px 8px;
+}
+
+#add:hover {
+  background: var(--brun-cacao);
+}
+
+ul {
+  padding: 0;
+}
+            li {
+            list-style: none;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+li.checked {
+  text-decoration: line-through;
+  color: var(--gris-perle);
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 28px;
+  color: var(--brun-cacao);
+}
+
+* {
+  box-sizing: border-box;
+}
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--brun-cacao);
+  font-size: 18px;
+  padding: 0 8px;
+  transition: color 0.3s ease;
+}
+
+.delete-btn:hover {
+  color: var(--vert-sauge);
+}
+.box {
+  background-color: #f5f0e6; /* beige clair élégant */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+  max-width: 60px;
+  transition: box-shadow 0.3s ease;
+  border: none;
+  margin: 5px;
+}
+
+.box:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f9f7f3;
+  padding: 40px;
+}
+#progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+
+
+
+
+#add {
+  padding: 12px 25px;
+  background-color:var(--bleu-nuit); /* vert sauge */
+  color: #fffdf5; /* blanc cassé */
+  border: none;
+  border-radius: 35px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
+  
+}
+
+#add:hover {
+  background-color: #080808; /* vert sauge légèrement plus foncé */
+  transform: scale(1.05);
+}
+
+#add:active {
+  background-color: #7b956f;
+  transform: scale(0.98);
+}
+#completed-image {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 150px;
+  display: none;
+  transition: opacity 0.5s ease;
+  z-index: 100;
+}
+#main-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #fdfcf9;
+}
+
+#left-section {
+  flex: 3;
+  padding: 30px;
+}
+
+#right-banner {
+  flex: 1;
+  background-color: #f5f2ec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#completed-image {
+  height: 100%;
+  width: auto;
+  display: none; /* cachée par défaut */
+  object-fit: contain;
+  border-left: 3px solid #dcd6c9;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.05);
+  transition: opacity 0.5s ease;
+}
+#completion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 30, 0.85); /* bleu nuit foncé et transparent */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+#completion-overlay.active {
+  display: flex;
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.quote-box {
+  background: linear-gradient(135deg, #747db9, #2f8356); /* violet → rose framboise */
+  color: #ffffff;
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  font-size: 1.6rem;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  max-width: 500px;
+  animation: scaleUp 0.4s ease;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.quote-text {
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 1px;
+ 
+}
+
+
+/* Conteneur des boutons filtre */
+.filter-container {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+
+
+#todo-list li {
+  border: 1.5px solid var(--vert-sauge);
+  border-radius: 12px;
+  padding: 12px 15px;
+  margin-bottom: 12px; /* espace entre les tâches */
+  box-shadow: 0 4px 8px rgba(93, 64, 55, 0.2);
+  background-color: var(--blanc-casse);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  color: var(--noir-profond);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#todo-list li:hover {
+  border-color: #8aa57c; /* vert sauge plus foncé */
+  box-shadow: 0 6px 15px rgba(93, 64, 55, 0.35);
+}
+
+/* Tâche cochée barrée en gris */
+#todo-list li.checked {
+  text-decoration: line-through;
+  color: var(--gris-perle);
+  border-color: var(--gris-perle);
+  box-shadow: none;
+}
+
+/* Pour bien espacer la checkbox et le texte */
+#todo-list li input[type="checkbox"] {
+  margin-right: 12px;
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+/* Pour que le texte prenne tout l'espace dispo */
+#todo-list li span {
+  flex-grow: 1;
+  user-select: none; /* évite sélection accidentelle */
+}
+
+body {
+  background: linear-gradient(to bottom, #faf9f6 0%, #2c3e50 100%);
+  color: var(--blanc-casse);
+}
+h1 {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 3.5rem;
+  color: var(--brun-cacao);
+  text-shadow: 3px 3px 6px rgba(163, 177, 138, 0.6);
+}
+.container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.box {
+  background-color: var(--blanc-casse);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.box:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+#todo-box {
+  flex-grow: 3;
+  max-width: 600px;
+}
+
+#filter-box {
+  flex-grow: 1;
+  max-width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 15px;
+}
+
+/* Boutons filtres dans la box filtre */
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Style des boutons */
+.filter-btn {
+  background-color:black;
+  color: var(--blanc-casse);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.filter-btn:hover {
+  background-color: var(--brun-cacao);
+  transform: scale(1.05);
+}
+
+.filter-btn.active {
+  background-color: var(--bleu-nuit);
+  color: var(--blanc-casse);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Barre de progression centrée sous les deux boîtes */
+#progress-container {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 820px;
+  background-color:#2C3E50;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#progress-bar {
+  height: 100%; 
+  width: 0%;
+  background-color:var(--vert-sauge);
+  transition: width 0.4s ease;
+}
+
+#progress-text {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: #f5f5f5;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#filter-box {
+  background-color: transparent; /* rendre le box transparent */
+  border: none; /* supprimer la bordure */
+  box-shadow: none; /* supprimer l'ombre */
+  margin-left: 20px;
+  padding: 0;
+}
+
+#btn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: start;
+}
+
+.filter-btn {
+  background-color: transparent; /* boutons transparents */
+  border: 1px solid #0f0f0f; /* fine bordure visible */
+  padding: 8px 12px;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* léger effet au survol */
+}
+
+.filter-btn.active {
+  border-color: #000;
+  font-weight: bold;
+}
+#todo-list {
+  max-height: 300px;       /* Hauteur maximale avant apparition du scroll */
+  overflow-y: auto;        /* Scroll vertical activé */
+  padding-right: 10px;     /* Pour ne pas couper le texte avec la barre de scroll */
+  margin-top: 15px;
+}
+
+/* Optionnel : personnalisation de la scrollbar pour Chrome, Edge, Safari */
+#todo-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+#todo-list::-webkit-scrollbar-thumb {
+  background-color:var(--vert-sauge);
+  border-radius: 8px;
+}
+
+#todo-list::-webkit-scrollbar-track {
+  background: var(--blanc-casse);
+}
+
+#pic{
+  width: 100px;
+  height: 100px;
+
+}
+#todo-box {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px; /* hauteur max totale de la box */
+}
+
+#todo-list {
+  flex-grow: 1;       /* prends tout l'espace dispo */
+  overflow-y: auto;   /* scroll si trop de tâches */
+  max-height: 300px;  /* hauteur max liste (tu peux ajuster) */
+  margin-top: 15px;
+  padding-right: 10px;
+}
+
+/* Le conteneur global container garde display:flex, gap, etc */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* Garder la barre de progression toujours en bas et visible */
+#progress-container {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 820px;
+  background-color: var(--gris-perle);
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.filter-btn {
+  background-color: transparent; /* boutons transparents */
+  border: 1px solid #0f0f0f; /* fine bordure visible */
+  padding: 8px 12px;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* léger effet au survol */
+}
+.filter-btn:hover {
+  background-color: var(--vert-sauge); /* fond vert sauge au survol */
+  color: var(--blanc-casse);            /* texte blanc cassé au survol */
+  border-color: var(--vert-sauge);
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(163, 177, 138, 0.5);
+}
+.filter-btn {
+  background-color: transparent;
+  border: 1px solid #0f0f0f;
+  padding: 8px 12px;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  width: 100%;
+  font-weight: normal;
+}
+
+.filter-btn:hover {
+  background-color: var(--bleu-nuit);
+  color: var(--blanc-casse);
+  border-color: var(--vert-sauge);
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(163, 177, 138, 0.5);
+}
+
+#div1{display: flex;
+}
+
+
+
+
+ 
+    </style>
+
+
+
+
+  <body>
+  <div class="container">
+    <!-- Box principale To-Do -->
+    <div class="box" id="todo-box">
+      <h1>TO-DO List</h1>
+
+      <div id="search-container">
+        <input type="text" class="search-input" id="search" placeholder="Search todos">
+      </div>
+
+      <div id="div1">
+        <input id="task" type="text" placeholder="Add a new task" style="flex-grow: 1;">
+        <button id="add">ADD</button>
+      </div>
+
+      <ul id="todo-list"></ul>
+    </div>
+
+    <!-- Box pour les filtres -->
+    <div class="box" id="filter-box">
+      <div id="btn" class="filter-container">
+        <button id="toutes" class="filter-btn active">All</button>
+        <button id="en-cours" class="filter-btn">In Progress</button>
+        <button id="termine" class="filter-btn">Completed</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barre de progression déplacée ici, à l'extérieur des boxes -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+  <p id="progress-text">0% completed</p>
+
+  <!-- Citation de fin -->
+  <div id="completion-overlay">
+    <div class="quote-box">
+      <p class="quote-text">« good job!! you got everything done »</p>
+    </div>
+  </div>
+
+  <script src="test.js"></script>
 </body>
-</html>
