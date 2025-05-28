@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,8 +63,20 @@
             box-sizing: border-box;
             margin-bottom: 15px;
         }
-    
-     
+        
+        #add {
+            padding: 12px 25px;
+            background: #8be68e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        
+        #add:hover{
+            background: #69f870;
+        }
         
         ul {
             padding: 0;
@@ -165,7 +178,7 @@ button:hover {
 }
 
 #add {
-  padding: 2px 25px;
+  padding: 12px 25px;
   background: var(--bleu-nuit);
   color: var(--blanc-casse);
   border: none;
@@ -173,7 +186,6 @@ button:hover {
   font-size: 18px;
   cursor: pointer;
   transition: background 0.3s ease;
-margin: 5px 6px 7px 8px;
 }
 
 #add:hover {
@@ -226,10 +238,9 @@ h1 {
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   flex-grow: 1;
-  max-width: 60px;
+  max-width: 600px;
   transition: box-shadow 0.3s ease;
   border: none;
-  margin: 5px;
 }
 
 .box:hover {
@@ -252,24 +263,28 @@ body {
 
 
 
-
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
 #add {
   padding: 12px 25px;
-  background-color:var(--bleu-nuit); /* vert sauge */
+  background-color: #9caf88; /* vert sauge */
   color: #fffdf5; /* blanc cassé */
   border: none;
-  border-radius: 35px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
-  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #add:hover {
-  background-color: #080808; /* vert sauge légèrement plus foncé */
-  transform: scale(1.05);
+  background-color: #8aa57c; /* vert sauge légèrement plus foncé */
+  transform: scale(1.03);
 }
 
 #add:active {
@@ -339,7 +354,7 @@ body {
 }
 
 .quote-box {
-  background: linear-gradient(135deg, #747db9, #2f8356); /* violet → rose framboise */
+  background: linear-gradient(135deg, #9b59b6, #e91e63); /* violet → rose framboise */
   color: #ffffff;
   padding: 2rem 3rem;
   border-radius: 20px;
@@ -358,10 +373,22 @@ body {
 
 .quote-text {
   margin: 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+
+.quote-text {
+  margin: 0;
   font-weight: bold;
   letter-spacing: 1px;
- 
 }
+
+
+
+
+
+
 
 
 /* Conteneur des boutons filtre */
@@ -372,8 +399,55 @@ body {
   gap: 15px;
 }
 
+/* Boutons élégants */
+.filter-btn {
+  background-color: var(--vert-sauge);
+  color: var(--blanc-casse);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
 
+.filter-btn:hover {
+  background-color: var(--brun-cacao);
+  transform: scale(1.05);
+}
 
+.filter-btn.active {
+  background-color: var(--bleu-nuit);
+  color: var(--blanc-casse);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Barre de progression */
+#progress-container {
+  margin-top: 20px;
+  width: 100%;
+  background-color: var(--gris-perle);
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--vert-sauge);
+  transition: width 0.4s ease;
+}
+
+/* Texte de progression */
+#progress-text {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--brun-cacao);
+}
 #todo-list li {
   border: 1.5px solid var(--vert-sauge);
   border-radius: 12px;
@@ -433,7 +507,7 @@ h1 {
 }
 
 .box {
-  background-color: var(--blanc-casse);
+  background-color:white;
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -447,7 +521,7 @@ h1 {
 
 #todo-box {
   flex-grow: 3;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 #filter-box {
@@ -469,7 +543,7 @@ h1 {
 
 /* Style des boutons */
 .filter-btn {
-  background-color:black;
+  background-color: var(--vert-sauge);
   color: var(--blanc-casse);
   border: none;
   padding: 10px 20px;
@@ -483,13 +557,13 @@ h1 {
 }
 
 .filter-btn:hover {
-  background-color: var(--brun-cacao);
+  background-color: black;
   transform: scale(1.05);
 }
 
 .filter-btn.active {
   background-color: var(--bleu-nuit);
-  color: var(--blanc-casse);
+  color:white;
   box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
@@ -498,8 +572,8 @@ h1 {
   margin-top: 30px;
   width: 100%;
   max-width: 820px;
-  background-color:#2C3E50;
-  height: 20px;
+  background-color:#ffffff;
+  height: 50px;
   border-radius: 10px;
   overflow: hidden;
   margin-left: auto;
@@ -507,8 +581,8 @@ h1 {
 }
 
 #progress-bar {
-  height: 100%; 
-  width: 0%;
+  height: 100%;
+  width:50%;
   background-color:var(--vert-sauge);
   transition: width 0.4s ease;
 }
@@ -517,14 +591,14 @@ h1 {
   margin-top: 10px;
   text-align: center;
   font-weight: 600;
-  color: #f5f5f5;
-  max-width: 820px;
+  color: white;
+  max-width: 60px;
   margin-left: auto;
   margin-right: auto;
 }
 #filter-box {
   background-color: transparent; /* rendre le box transparent */
-  border: none; /* supprimer la bordure */
+ /* supprimer la bordure */
   box-shadow: none; /* supprimer l'ombre */
   margin-left: 20px;
   padding: 0;
@@ -533,13 +607,13 @@ h1 {
 #btn {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   align-items: start;
 }
 
 .filter-btn {
   background-color: transparent; /* boutons transparents */
-  border: 1px solid #0f0f0f; /* fine bordure visible */
+  border: 1px solid #ccc; /* fine bordure visible */
   padding: 8px 12px;
   color: #333;
   border-radius: 8px;
@@ -548,118 +622,16 @@ h1 {
 }
 
 .filter-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05); /* léger effet au survol */
+  background-color:#2c3e50; /* léger effet au survol */
 }
 
 .filter-btn.active {
-  border-color: #000;
+ 
   font-weight: bold;
 }
-#todo-list {
-  max-height: 300px;       /* Hauteur maximale avant apparition du scroll */
-  overflow-y: auto;        /* Scroll vertical activé */
-  padding-right: 10px;     /* Pour ne pas couper le texte avec la barre de scroll */
-  margin-top: 15px;
-}
 
-/* Optionnel : personnalisation de la scrollbar pour Chrome, Edge, Safari */
-#todo-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-#todo-list::-webkit-scrollbar-thumb {
-  background-color:var(--vert-sauge);
-  border-radius: 8px;
-}
-
-#todo-list::-webkit-scrollbar-track {
-  background: var(--blanc-casse);
-}
-
-#pic{
-  width: 100px;
-  height: 100px;
-
-}
-#todo-box {
-  display: flex;
-  flex-direction: column;
-  max-height: 500px; /* hauteur max totale de la box */
-}
-
-#todo-list {
-  flex-grow: 1;       /* prends tout l'espace dispo */
-  overflow-y: auto;   /* scroll si trop de tâches */
-  max-height: 300px;  /* hauteur max liste (tu peux ajuster) */
-  margin-top: 15px;
-  padding-right: 10px;
-}
-
-/* Le conteneur global container garde display:flex, gap, etc */
-.container {
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-/* Garder la barre de progression toujours en bas et visible */
-#progress-container {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 820px;
-  background-color: var(--gris-perle);
-  height: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-
-.filter-btn {
-  background-color: transparent; /* boutons transparents */
-  border: 1px solid #0f0f0f; /* fine bordure visible */
-  padding: 8px 12px;
-  color: #333;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.filter-btn:hover {
-  background-color: rgba(0, 0, 0, 0.05); /* léger effet au survol */
-}
-.filter-btn:hover {
-  background-color: var(--vert-sauge); /* fond vert sauge au survol */
-  color: var(--blanc-casse);            /* texte blanc cassé au survol */
-  border-color: var(--vert-sauge);
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(163, 177, 138, 0.5);
-}
-.filter-btn {
-  background-color: transparent;
-  border: 1px solid #0f0f0f;
-  padding: 8px 12px;
-  color: #333;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  width: 100%;
-  font-weight: normal;
-}
-
-.filter-btn:hover {
-  background-color: var(--bleu-nuit);
-  color: var(--blanc-casse);
-  border-color: var(--vert-sauge);
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(163, 177, 138, 0.5);
-}
-
-#div1{display: flex;
-}
-
-
+ 
+    </style>
 
 
  
@@ -672,15 +644,17 @@ h1 {
   <div class="container">
     <!-- Box principale To-Do -->
     <div class="box" id="todo-box">
-      <h1>TO-DO List</h1>
+      <h1> 📝TO-Do List</h1>
 
       <div id="search-container">
-        <input type="text" class="search-input" id="search" placeholder="Search todos">
+        <input type="text" class="search-input" id="search" placeholder="🧐 Search todos">
       </div>
 
-      <div id="div1">
-        <input id="task" type="text" placeholder="Add a new task" style="flex-grow: 1;">
-        <button id="add">ADD</button>
+      <div style="display: flex; gap: 10px;">
+          
+        <input id="task" type="text" placeholder=" Add a new task" style="flex-grow: 1;">
+        
+        <button id="add">   ADD</button>
       </div>
 
       <ul id="todo-list"></ul>
@@ -696,7 +670,7 @@ h1 {
     </div>
   </div>
 
-  <!-- Barre de progression déplacée ici, à l'extérieur des boxes -->
+  <!--  Barre de progression déplacée ici, à l'extérieur des boxes -->
   <div id="progress-container">
     <div id="progress-bar"></div>
   </div>
@@ -705,7 +679,7 @@ h1 {
   <!-- Citation de fin -->
   <div id="completion-overlay">
     <div class="quote-box">
-      <p class="quote-text">« good job!! you got everything done »</p>
+      <p class="quote-text">« Chaque petit pas compte. Tu as bien avancé ! »</p>
     </div>
   </div>
 
